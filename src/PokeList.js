@@ -6,7 +6,8 @@ import PokeItem from './PokeItem.js';
 export default class PokeList extends Component {
 
     state = {
-        filter: ''
+        filter: '',
+        name: ''
     }
 
     handleChange = e => {
@@ -15,11 +16,24 @@ export default class PokeList extends Component {
         })
     }
 
+    handleInput = e => {
+        this.setState({
+            name: e.target.value
+        })
+        console.log(this.state.name, 'state.name');
+    }
+
     render() {
 
-        const filteredCreatures = pokeDex.filter((item) => {
+        const filteredPokemon = pokeDex.filter((item) => {
             if (!this.state.filter) return true;
             if (this.state.filter === item.pokemon) return true;
+            return false;
+        })
+
+        const searchedPokemon = pokeDex.filter((item) => {
+            if (!this.state.name) return true;
+            if (this.state.name === item.pokemon) return true;
             return false;
         })
 
@@ -29,13 +43,17 @@ export default class PokeList extends Component {
                     <option></option>
                     {pokeDex.map(item => <option value={item.pokemon}>{item.pokemon}</option>)}
                 </select>
-                <div className="creatures">
+                <form>
+                    <input onChange={this.handleInput} />
+                    <button type='submit' >Search</button>
+                </form>
+                <div className="pokemon">
                     {
-                        filteredCreatures.map(item =>
+                        searchedPokemon.map(item =>
                             <PokeItem
-                                title={item.pokemon}
-                                src={item.url_image}
-                                description={item.type_1}
+                                pokemon={item.pokemon}
+                                url_image={item.url_image}
+                                type_1={item.type_1}
                             />
                         )
                     }

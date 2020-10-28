@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+.pokemon-image {
+  max-height: 200px;
+  border-radius: 15px;
+} 
+
+.pokemon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.image-item {
+  width: 300px;
+  border: solid;
+  border-color: black;
+  border-radius: 15px;
+}
