@@ -7,7 +7,7 @@ export default class PokeList extends Component {
 
     state = {
         filter: '',
-        name: ''
+        name: '',
     }
 
     handleChange = e => {
@@ -20,28 +20,29 @@ export default class PokeList extends Component {
         this.setState({
             name: e.target.value
         })
-        console.log(this.state.name, 'state.name');
     }
 
-    render() {
 
-        const filteredPokemon = pokeDex.filter((item) => {
-            if (!this.state.filter) return true;
-            if (this.state.filter === item.pokemon) return true;
-            return false;
-        })
+    render() {
 
         const searchedPokemon = pokeDex.filter((item) => {
             if (!this.state.name) return true;
             if (this.state.name === item.pokemon) return true;
             return false;
         })
+            .sort((a, b) => {
+                if (this.props.order === 'descending') {
+                    return b[this.props.sortType] - a[this.props.sortType]
+                } else {
+                    return a[this.props.sortType] - b[this.props.sortType]
+                }
+            })
 
         return (
             <>
                 <select onChange={this.handleChange}>
                     <option></option>
-                    {pokeDex.map(item => <option value={item.pokemon}>{item.pokemon}</option>)}
+                    {pokeDex.map(item => <option value={item.type_1}>{item.type_1}</option>)}
                 </select>
                 <form>
                     <input onChange={this.handleInput} />
@@ -54,6 +55,8 @@ export default class PokeList extends Component {
                                 pokemon={item.pokemon}
                                 url_image={item.url_image}
                                 type_1={item.type_1}
+                                attack={item.attack}
+                                defense={item.defense}
                             />
                         )
                     }
