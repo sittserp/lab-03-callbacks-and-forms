@@ -1,4 +1,4 @@
-![title](Screen Shot 2020-10-28 at 8.32.06 PM.png)
+![title](diagram.png)
 
 
 # Getting Started with Create React App
