@@ -1,3 +1,6 @@
+![title](Screen Shot 2020-10-28 at 8.32.06 PM.jpg)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
