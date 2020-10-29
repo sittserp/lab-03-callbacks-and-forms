@@ -27,7 +27,7 @@ export default class PokeList extends Component {
 
         const searchedPokemon = pokeDex.filter((item) => {
             if (!this.state.name) return true;
-            if (this.state.name === item.pokemon) return true;
+            if (item.pokemon.includes(this.state.name)) return true;
             return false;
         })
             .sort((a, b) => {
