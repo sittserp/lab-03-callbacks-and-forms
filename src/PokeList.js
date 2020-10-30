@@ -1,19 +1,27 @@
 import React, { Component } from 'react'
-import pokeDex from './data.js';
+// import pokeDex from './data.js';
 import PokeItem from './PokeItem.js';
+import fetch from 'superagent';
 
 
 export default class PokeList extends Component {
 
     state = {
+        list: [],
         filter: '',
         name: '',
+    }
+
+    componentDidMount = async () => {
+        await this.fetchPokemon();
     }
 
     handleChange = e => {
         this.setState({
             filter: e.target.value
         })
+
+        // this.fetchPokemon();
     }
 
     handleInput = e => {
@@ -22,10 +30,16 @@ export default class PokeList extends Component {
         })
     }
 
+    fetchPokemon = async () => {
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex/${this.state.filter}`);
+
+        this.setState({ list: response.body.results });
+    }
+
 
     render() {
 
-        const searchedPokemon = pokeDex.filter((item) => {
+        const searchedPokemon = this.state.list.filter((item) => {
             if (!this.state.name) return true;
             if (item.pokemon.includes(this.state.name)) return true;
             return false;
@@ -40,27 +54,33 @@ export default class PokeList extends Component {
 
         return (
             <>
-                <select onChange={this.handleChange}>
+                {/* <select onChange={this.handleChange}>
                     <option></option>
-                    {pokeDex.map(item => <option value={item.type_1}>{item.type_1}</option>)}
-                </select>
-                <form>
+                    <option value="types">types</option>
+                    <option value="abilities">abilities</option>
+                    <option value="shapes">shapes</option>
+                    <option value="eggGroups">egg groups</option>
+                </select> */}
+                <form onSubmit={this.handleSubmit}>
                     <input onChange={this.handleInput} />
-                    <button type='submit' >Search</button>
+                    <button>Search</button>
                 </form>
                 <div className="pokemon">
                     {
-                        searchedPokemon.map(item =>
-                            <PokeItem
-                                pokemon={item.pokemon}
-                                url_image={item.url_image}
-                                type_1={item.type_1}
-                                attack={item.attack}
-                                defense={item.defense}
-                            />
-                        )
-                    }
-                </div>
+                        this.state.list.length === 0
+                            ? 'Fetching Data...'
+                            : <div className="pokemon">{searchedPokemon.map(item => <div key={item.pokemon}>
+                                <PokeItem
+                                    pokemon={item.pokemon}
+                                    url_image={item.url_image}
+                                    type_1={item.type_1}
+                                    attack={item.attack}
+                                    defense={item.defense}
+                                />
+                            </div>
+                            )
+                            }</div>
+                    }</div>
             </>
         )
     }

@@ -1,5 +1,12 @@
-import './App.css';
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import './App.css';
+import Nav from './Nav.js';
+import Home from './Home.js';
 import PokeList from './PokeList.js';
 import Sort from './Sort';
 
@@ -26,10 +33,26 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <Sort handleSortType={this.handleSortType}
-          handleOrder={this.handleOrder} />
-        <PokeList sortType={this.state.sortType}
-          order={this.state.order} />
+        <Router>
+          <Nav />
+          <Sort handleSortType={this.handleSortType}
+            handleOrder={this.handleOrder} />
+          <Switch>
+            <Route
+              path="/"
+              exact
+              render={(routerProps) => <Home {...routerProps} />}
+            />
+            <Route
+              path="/list"
+              exact
+              render={(routerProps) => <PokeList
+                sortType={this.state.sortType}
+                order={this.state.order}
+                {...routerProps} />}
+            />
+          </Switch>
+        </Router>
       </div>
     )
   }
