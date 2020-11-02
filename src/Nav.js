@@ -13,6 +13,9 @@ export default class Nav extends Component {
                     <li>
                         <Link to="/list">PokeList</Link>
                     </li>
+                    <li>
+                        <Link to="/pagination">PaginatedList</Link>
+                    </li>
                 </ul>
             </div>
         );

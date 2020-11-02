@@ -9,6 +9,7 @@ import Nav from './Nav.js';
 import Home from './Home.js';
 import PokeList from './PokeList.js';
 import Sort from './Sort';
+import PaginatedList from './PaginatedList.js';
 
 
 export default class App extends Component {
@@ -50,6 +51,11 @@ export default class App extends Component {
                 sortType={this.state.sortType}
                 order={this.state.order}
                 {...routerProps} />}
+            />
+            <Route
+              path="/pagination"
+              exact
+              render={(routerProps) => <PaginatedList {...routerProps} />}
             />
           </Switch>
         </Router>
