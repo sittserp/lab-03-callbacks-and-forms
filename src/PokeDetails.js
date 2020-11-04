@@ -8,24 +8,24 @@ export default class PokeItem extends Component {
     }
 
     componentDidMount = async () => {
-        const response = await fetch.get(``);
+        const response = await fetch.get(`https://alchemy-pokedex.herokuapp.com/api/pokedex/${this.props.match.params._id}`);
 
-        this.setState({ list: response.body.results })
+        this.setState({ list: response.body })
     }
 
     render() {
         return (
             <div className="image-item">
-                <div>{this.props.pokemon}</div>
-                <img className="pokemon-image" src={this.props.url_image} alt='pokemon' />
-                <div>Type 1: {this.props.type_1}</div>
-                <div>Type 2: {this.props.type_2}</div>
-                <div>Ability 1: {this.props.ability_1}</div>
-                <div>Ability 2: {this.props.ability_2}</div>
-                <div>Shape: {this.props.shape}</div>
-                <div>Attack: {this.props.attack}</div>
-                <div>Defense: {this.props.defense}</div>
-                <div>Health Points: {this.props.hp}</div>
+                <div>{this.state.list.pokemon}</div>
+                <img className="pokemon-image" src={this.state.list.url_image} alt='pokemon' />
+                <div>Type 1: {this.state.list.type_1}</div>
+                <div>Type 2: {this.state.list.type_2}</div>
+                <div>Ability 1: {this.state.list.ability_1}</div>
+                <div>Ability 2: {this.state.list.ability_2}</div>
+                <div>Shape: {this.state.list.shape}</div>
+                <div>Attack: {this.state.list.attack}</div>
+                <div>Defense: {this.state.list.defense}</div>
+                <div>Health Points: {this.state.list.hp}</div>
             </div>
         )
     }
