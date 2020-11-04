@@ -10,7 +10,7 @@ import Home from './Home.js';
 import PokeList from './PokeList.js';
 import Sort from './Sort';
 import PaginatedList from './PaginatedList.js';
-
+import PokeDetails from './PokeDetails.js';
 
 export default class App extends Component {
 
@@ -56,6 +56,11 @@ export default class App extends Component {
               path="/pagination"
               exact
               render={(routerProps) => <PaginatedList {...routerProps} />}
+            />
+            <Route
+              path="/pagination/:_id"
+              exact
+              render={(routerProps) => <PokeDetails {...routerProps} />}
             />
           </Switch>
         </Router>

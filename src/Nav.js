@@ -10,11 +10,11 @@ export default class Nav extends Component {
                         <Link to="/">Home</Link>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <Link to="/list">PokeList</Link>
-                    </li>
+                    </li> */}
                     <li>
-                        <Link to="/pagination">PaginatedList</Link>
+                        <Link to="/pagination">PokeList</Link>
                     </li>
                 </ul>
             </div>

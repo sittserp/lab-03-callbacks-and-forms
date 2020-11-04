@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetch from 'superagent';
 import PokeItem from './PokeItem.js';
+import { Link } from 'react-router-dom';
 
 export default class PaginatedList extends Component {
     state = {
@@ -46,15 +47,18 @@ export default class PaginatedList extends Component {
                     {
                         this.state.list.length === 0
                             ? 'Fetching Data...'
-                            : <div className="pokemon">{this.state.list.map(item => <div key={item.pokemon}>
-                                <PokeItem
-                                    pokemon={item.pokemon}
-                                    url_image={item.url_image}
-                                    type_1={item.type_1}
-                                    attack={item.attack}
-                                    defense={item.defense}
-                                />
-                            </div>
+                            : <div className="pokemon">{this.state.list.map(item =>
+                                <Link to={`/pagination/${item._id}`}>
+                                    <div key={item.pokemon}>
+                                        <PokeItem
+                                            pokemon={item.pokemon}
+                                            url_image={item.url_image}
+                                            type_1={item.type_1}
+                                            attack={item.attack}
+                                            defense={item.defense}
+                                        />
+                                    </div>
+                                </Link>
                             )
                             }</div>
                     }</div>
